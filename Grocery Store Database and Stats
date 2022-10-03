@@ -1,0 +1,34 @@
+--Create A Grocery Store Database
+
+CREATE TABLE store (id INTEGER PRIMARY KEY, item TEXT, aisle TEXT, price INTEGER, popularity INTEGER);
+
+INSERT INTO store VALUES (1, "Vanilla Ice Cream", "Frozen Food", 3.99, 79);
+INSERT INTO store VALUES (2, "Bananas", "Produce", 0.15, 87);
+INSERT INTO store VALUES (3, "Blueberries", "Produce", 5.99, 58);
+INSERT INTO store VALUES (4, "Almonds","Snack Foods", 7.99, 24);
+INSERT INTO store VALUES (5, "Eggs", "Dairy", 4.99, 56);
+INSERT INTO store VALUES (6, "Milk", "Dairy", 3.99, 82);
+INSERT INTO store VALUES (7, "Toilet Paper", "Home Supplies", 10.99, 25)
+INSERT INTO store VALUES (8, "Zucchini", "Produce", 5.99, 14);
+INSERT INTO store VALUES (9, "Brussels Sprouts", 8.99, 21);
+INSERT INTO store VALUES (10, "Butter", "Dairy", 2.99, 72);
+INSERT INTO store VALUES (11, "Chicken Nuggets", "Meat", 13.99, 55);
+INSERT INTO store VALUES (12, "Onions", "Produce", 4.39, 11);
+INSERT INTO store VALUES (13, "Aqua Fresh Tooth Paste", "Home Supplies", 2.69, 23);
+INSERT INTO store VALUES (14, "L'Oreal Shampoo", "Home Supplies", 7.99, 06);
+INSERT INTO store VALUES (15, "Chia Seeds", "Health", 20.99, 01);
+
+--Display database ordered by price
+SELECT * FROM store
+ORDER BY price desc;
+
+--What is the avg price of items in the dairy section?
+SELECT AVG(price) "avg dairy item price"
+FROM store
+WHERE ailse='dairy';
+
+--What are the 5 Least Popular Items
+SELECT item, price, popularity
+FROM store
+ORDER By Popularity asc
+limit 5;
