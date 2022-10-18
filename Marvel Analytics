@@ -1,0 +1,33 @@
+#In this SQL code, I'm querying a database that's holding Marvel data to answer questions about the data. 
+
+#1. How many Marvel Superheroes have hometowns located inside America in the database? 
+SELECT COUNT(*) 
+FROM "pamelafox/marvel_characters.sql"."marvels"
+WHERE hometown = 'USA';
+
+#2. Who are the five smartest characters in the universe? 
+SELECT name, intelligence
+FROM "pamelafox/marvel_characters.sql"."marvels"
+ORDER BY intelligence desc
+limit 5;
+
+#3. Who weighs the least out of the characters in the database based on the characters with the most strength? 
+SELECT name, min(weight_kg), strength
+FROM "pamelafox/marvel_characters.sql"."marvels"
+GROUP BY strength 
+ORDER By strength desc
+limit 1;
+
+#4. List all the marvel characters in alphabetical order. 
+SELECT name
+FROM "pamelafox/marvel_characters.sql"."marvels"
+ORDER BY name asc;
+
+#5. Who is the most popular character from the EUA? 
+SELECT
+name
+FROM "pamelafox/marvel_characters.sql"."marvels" titles
+WHERE hometown = 'EUA'
+ORDER BY popularity desc
+limit 1;
+
