@@ -1,0 +1,125 @@
+#In this project, I make my own tables with some small sets of “famous people”, then make more tables about things they do and join those to create more readable lists.
+# My data answers the question of what countries the top 10 billionaires hail from as well as their networth and source of income.  
+
+
+CREATE TABLE Billionaires (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    networth INTEGER);
+    
+INSERT INTO Billionaires (name, networth) VALUES ("Elon Musk", 146.5);
+INSERT INTO Billionaires (name, networth) VALUES ("Bernarnd Arnault & Family", 182.8);
+INSERT INTO Billionaires (name, networth) VALUES ("Jeff Bezos", 107.3);
+INSERT INTO Billionaires (name, networth) VALUES ("Gautam Adani", 126);
+INSERT INTO Billionaires (name, networth) VALUES ("Bill Gates", 103.3);
+INSERT INTO Billionaires (name, networth) VALUES ("Larry Ellison", 102.4);
+INSERT INTO Billionaires (name, networth) VALUES ("Warren Buffet", 107.6);
+INSERT INTO Billionaires (name, networth) VALUES ("Larry Page", 77.3);
+INSERT INTO Billionaires (name, networth) VALUES ("Sergey Brin", 74.2);
+INSERT INTO Billionaires (name, networth) VALUES ("Mukesh Ambani", 90.2);
+
+CREATE table Factoids (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    person_id INTEGER,
+    name TEXT);
+    
+INSERT INTO Factoids (person_id, name) VALUES (1, "Tesla");
+INSERT INTO Factoids (person_id, name) VALUES (1, "SpaceX");
+INSERT INTO Factoids (person_id, name) VALUES (1, "United States");
+INSERT INTO Factoids (person_id, name) VALUES (2, "LVMH");
+INSERT INTO Factoids (person_id, name) VALUES (2, "France");
+INSERT INTO Factoids (person_id, name) VALUES (3, "Amazon");
+INSERT INTO Factoids (person_id, name) VALUES (3, "United States");
+INSERT INTO Factoids (person_id, name) VALUES (4, "Adani Group");
+INSERT INTO Factoids (person_id, name) VALUES (4, "India");
+INSERT INTO Factoids (person_id, name) VALUES (5, "Microsoft");
+INSERT INTO Factoids (person_id, name) VALUES (5, "United States");
+INSERT INTO Factoids (person_id, name) VALUES (6, "Oracle Corp.");
+INSERT INTO Factoids (person_id, name) VALUES (6, "United States");
+INSERT INTO Factoids (person_id, name) VALUES (7, "Berkshire Hathaway");
+INSERT INTO Factoids (person_id, name) VALUES (7, "United States");
+INSERT INTO Factoids (person_id, name) VALUES (8, "Google");
+INSERT INTO Factoids (person_id, name) VALUES (8, "United States");
+INSERT INTO Factoids (person_id, name) VALUES (9, "Google");
+INSERT INTO Factoids (person_id, name) VALUES (9, "United States");
+INSERT INTO Factoids (person_id, name) VALUES (10, "Reliance India");
+INSERT INTO Factoids (person_id, name) VALUES (10, "India");
+
+
+SELECT B.name, F.name
+FROM Billionaires B
+JOIN Factoids F
+ON B.id = F.person_id
+WHERE B.name = 'Elon Musk'; 
+
+SELECT B.name, F.name
+FROM Billionaires B
+JOIN Factoids F
+ON B.id = F.person_id
+WHERE B.name = 'Bernarnd Arnault & Family';
+
+SELECT B.name, F.name
+FROM Billionaires B
+JOIN Factoids F
+ON B.id = F.person_id
+WHERE B.name = 'Jeff Bezos'; 
+
+SELECT B.name, F.name
+FROM Billionaires B
+JOIN Factoids F
+ON B.id = F.person_id
+WHERE B.name = 'Gautam Adani';
+
+SELECT B.name, F.name
+FROM Billionaires B
+JOIN Factoids F
+ON B.id = F.person_id
+WHERE B.name = 'Bill Gates'; 
+
+SELECT B.name, F.name
+FROM Billionaires B
+JOIN Factoids F
+ON B.id = F.person_id
+WHERE B.name = 'Larry Ellison';
+
+SELECT B.name, F.name
+FROM Billionaires B
+JOIN Factoids F
+ON B.id = F.person_id
+WHERE B.name = 'Warren Buffet'; 
+
+SELECT B.name, F.name
+FROM Billionaires B
+JOIN Factoids F
+ON B.id = F.person_id
+WHERE B.name = 'Larry Page';
+
+SELECT B.name, F.name
+FROM Billionaires B
+JOIN Factoids F
+ON B.id = F.person_id
+WHERE B.name = 'Sergey Brin'; 
+
+SELECT B.name, F.name
+FROM Billionaires B
+JOIN Factoids F
+ON B.id = F.person_id
+WHERE B.name = 'Mukesh Ambani';
+
+SELECT *
+FROM Billionaires B
+JOIN Factoids F
+ON B.id = F.person_id
+WHERE F.name = 'United States';
+
+SELECT *
+FROM Billionaires B
+JOIN Factoids F
+ON B.id = F.person_id
+WHERE F.name = 'India';
+
+SELECT *
+FROM Billionaires B
+JOIN Factoids F
+ON B.id = F.person_id
+WHERE F.name = 'France';
