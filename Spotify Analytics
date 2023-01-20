@@ -1,0 +1,63 @@
+# For this project, I downloaded Spotify data from Kaggle.
+# Then I created a table to insert Spotify data into.
+# Finally, I performed analytics on the data using SQL. 
+
+#Creating the table: 
+CREATE TABLE BIT_DB.Spotifydata (
+id integer PRIMARY KEY,
+artist_name varchar NOT NULL,
+track_name varchar NOT NULL,
+track_id varchar NOT NULL,
+popularity integer NOT NULL,
+danceability decimal(4,3) NOT NULL,
+energy decimal(4,3) NOT NULL,
+key integer NOT NULL,
+loudness decimal(5,3) NOT NULL,
+mode integer NOT NULL,
+speechiness decimal(5,4) NOT NULL,
+acousticness decimal(6,5) NOT NULL,
+instrumentalness text NOT NULL,
+liveness decimal(5,4) NOT NULL,
+valence decimal(4,3) NOT NULL,
+tempo decimal(6,3) NOT NULL,
+duration_ms integer NOT NULL,
+time_signature integer NOT NULL 
+)
+
+#Then I inserted the Spotify Data .csv into the table.
+
+#Next, I explored the data using the following SQL. 
+
+#First I determined the avg popularity, danceability, and energy by artist and track. 
+SELECT
+artist_name
+,track_name
+,avg(popularity)
+,avg(danceability)
+,avg(energy)
+FROM BIT_DB.spotifydata
+GROUP BY artist_name, track_name
+
+#Then I determined which 10 might be the best idea to invite to perform at a Festival based on danceability.
+SELECT track_name, artist_name, danceability
+FROM BIT_DB.spotifydata
+ORDER BY danceability desc
+LIMIT 10
+
+#I also determined which artists might be good contenders for longer sets by uncovering which artists had the largest number of tracks on this chart.
+SELECT
+artist_name,
+count(artist_name) as track_count
+FROM BIT_DB.spotifydata
+Group BY artist_name
+Order BY track_count desc
+LIMIT 10
+
+#In order to determine who might be a good contender for a headliner I found the ten artists had the most popularity on average.
+SELECT
+artist_name
+,avg(popularity)
+FROM BIT_DB.spotifydata
+GROUP BY artist_name
+ORDER BY avg(popularity) desc
+LIMIT 10
