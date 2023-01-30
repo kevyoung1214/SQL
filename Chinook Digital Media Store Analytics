@@ -1,0 +1,89 @@
+#Show which customers are based in the United States
+SELECT 
+FirstName || ' ' || LastName AS 'Full Name', 
+CustomerId, 
+Country 
+FROM chinook2.customers 
+WHERE Country = "USA";
+
+#Find the Invoices of customers who are from the USA. 
+SELECT 
+c.FirstName || ' ' || c.LastName AS 'Full Name', 
+i.InvoiceId, 
+i.InvoiceDate,
+i.BillingCountry 
+FROM chinook2.invoices i
+LEFT JOIN chinook2.customers c
+ON i.CustomerId = c.CustomerId
+WHERE BillingCountry = "USA";
+
+#Show the Employees who are Sales Agents
+SELECT
+FirstName || ' ' || LastName AS 'Full Name',
+Title
+FROM chinook2.employees
+WHERE Title = 'Sales Support Agent';
+
+#What are the Invoices of each of the Sales Agents
+SELECT
+e.FirstName || ' ' || e.LastName AS 'Full Name', 
+i.InvoiceId
+FROM chinook2.employees e
+JOIN chinook2.customers c ON c.SupportRepId = e.EmployeeId
+JOIN chinook2.invoices i ON i.customerId = c.CustomerId;
+
+#Show the Invoice Total, Customer name, Country, and Sales Agent name for all invoices and customers
+SELECT
+e.FirstName || ' ' || e.LastName AS 'Sales Agent',
+c.FirstName || ' ' || c.LastName AS 'Customer Name',
+c.Country,
+i.Total
+FROM chinook2.employees e
+JOIN chinook2.customers c ON c.SupportRepId = e.EmployeeId
+JOIN chinook2.invoices i ON i.customerId = c.CustomerId;
+
+
+#Provide a query that shows all the Tracks, and include the Album name, Media type, and Genre
+SELECT
+t.Name AS 'Track Name',
+a.Title AS 'Album Name',
+m.Name AS 'Media Type',
+g.Name AS 'Genre'
+FROM chinook2.tracks t
+JOIN chinook2.albums a ON a.AlbumId = t.AlbumId 
+JOIN chinook2.media_types m ON t.MediaTypeId = m.MediaTypeId
+JOIN chinook2.genres g ON g.GenreId =t.GenreId
+
+#What are the total sales for 2013?
+SELECT
+SUM(i.Total)
+FROM chinook2.invoices i 
+WHERE i.InvoiceDate BETWEEN '2013-01-01' AND '2013-12-31';
+
+#How many Invoices were there in 2013?
+SELECT
+COUNT (*)
+FROM chinook2.invoices i 
+WHERE i.InvoiceDate BETWEEN '2013-01-01' AND '2013-12-31';
+
+#Show the total sales made by each sales agent.
+SELECT
+e.FirstName || ' ' || e.LastName AS 'Sales Agent',
+ROUND(SUM(i.Total)) as 'Total Sales'
+FROM chinook2.employees e
+JOIN chinook2.customers c ON c.SupportRepId = e.EmployeeId
+JOIN chinook2.invoices i ON i.customerId = c.CustomerId
+WHERE e.Title = 'Sales Support Agent' 
+GROUP BY e.FirstName;
+
+#Which Sales Agent made the most in 2013?
+SELECT
+e.FirstName || ' ' || e.LastName AS 'Sales Agent',
+ROUND(SUM(i.Total), 2) as 'Total Sales'
+FROM chinook2.employees e
+JOIN chinook2.customers c ON c.SupportRepId = e.EmployeeId
+JOIN chinook2.invoices i ON i.customerId = c.CustomerId
+WHERE i.InvoiceDate LIKE '2013%'
+GROUP BY e.FirstName
+ORDER BY (ROUND(SUM(i.Total), 2)) DESC
+LIMIT 1;
